@@ -46,7 +46,7 @@ let tickets = [
         event: "Sziget fesztival",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 100,
         link: "licit/1"
 
     },
@@ -54,7 +54,7 @@ let tickets = [
         event: "Diotoro balett",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 9,
         link: "licit/1"
 
     },
@@ -62,7 +62,7 @@ let tickets = [
         event: "Moma fesztival",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 6,
         link: "licit/1"
 
     },
@@ -70,7 +70,7 @@ let tickets = [
         event: "A kekszakallu herceg vara",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 1,
         link: "licit/1"
 
     },
@@ -78,7 +78,7 @@ let tickets = [
         event: "Balett mindenkinek",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 50,
         link: "licit/1"
 
     },
@@ -86,7 +86,7 @@ let tickets = [
         event: "Macskak musical",
         time: "2018-08-03 18:00",
         seller: "Kis Marton",
-        pcs: 5,
+        pcs: 15,
         link: "licit/1"
 
     }
@@ -118,11 +118,11 @@ function filterTickets() {
     let filteredTickets = [];
     if (currentValue === "") {
         filteredTickets = tickets;
-    }else{
-        filteredTickets = tickets.filter(function(item){
+    } else {
+        filteredTickets = tickets.filter(function (item) {
             var done = false;
-            for(let k in item){
-                if(item[k].toString().toLowerCase().indexOf(currentValue) > -1){
+            for (let k in item) {
+                if (item[k].toString().toLowerCase().indexOf(currentValue) > -1) {
                     done = true;
                 }
             }
@@ -131,3 +131,35 @@ function filterTickets() {
     }
     fillTicketsTable(filteredTickets);
 }
+
+//jegyek tablazat rendezese
+ticketTable.find("thead th[data-key]").on("click", orderTicketTable);
+function orderTicketTable() {
+
+    let th = $(this);
+    $.each(ticketTable.find("thead th[data-key]"), function (index, elem) {
+        let currentTh = $(elem);
+        if (th.data("key") != currentTh.data("key")) {
+            currentTh.removeClass("up").removeClass("down");
+        }
+    })
+    let key = th.data("key");
+    let sortedTickets = tickets.map(function (item) {
+        return item;
+    });
+    if (th.hasClass("down")) {
+        th.removeClass("down").addClass("up");
+    } else {
+        th.removeClass("up").addClass("down");
+    }
+    sortedTickets.sort(function (a, b) {
+        if (th.hasClass("down")) {
+            return a[key].toString().localeCompare(b[key].toString());
+        } else {
+            return b[key].toString().localeCompare(a[key].toString());
+        }
+
+    });
+    fillTicketsTable(sortedTickets);
+}
+
