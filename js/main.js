@@ -32,6 +32,7 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
+/*
 function showInvalidMessage() {
     let alertBox = $(".alert.alert-primary");
     alertBox
@@ -41,75 +42,8 @@ function showInvalidMessage() {
         .text("Sikertelen belepes!");
 }
 
-let tickets = [
-    {
-        event: "Sziget fesztival",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 100,
-        link: "licit/1"
 
-    },
-    {
-        event: "Diotoro balett",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 9,
-        link: "licit/1"
 
-    },
-    {
-        event: "Moma fesztival",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 6,
-        link: "licit/1"
-
-    },
-    {
-        event: "A kekszakallu herceg vara",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 1,
-        link: "licit/1"
-
-    },
-    {
-        event: "Balett mindenkinek",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 50,
-        link: "licit/1"
-
-    },
-    {
-        event: "Macskak musical",
-        time: "2018-08-03 18:00",
-        seller: "Kis Marton",
-        pcs: 15,
-        link: "licit/1"
-
-    }
-];
-let ticketTable = $("table.table.table-striped").eq(0);
-function fillTicketsTable(currentTickets) {
-    currentTickets = currentTickets || tickets;
-    let tbody = ticketTable.find("tbody");
-    tbody.html("");
-    $.each(currentTickets, function (index, ticket) {
-        let row = $(".templates .ticket-row").clone();
-        row.find("td").eq(0).html(index + 1);
-        row.find("td").eq(1).html(ticket.event);
-        row.find("td").eq(2).html(ticket.time);
-        row.find("td").eq(3).html(ticket.seller);
-        row.find("td").eq(4).html(ticket.pcs);
-        row.find("td").eq(5).html(ticket.link);
-        tbody.append(row);
-
-    });
-
-}
-fillTicketsTable();
 
 //Jegyek tablazat szurese
 $(".tickets-search-row input").on("keyup", filterTickets);
@@ -162,4 +96,5 @@ function orderTicketTable() {
     });
     fillTicketsTable(sortedTickets);
 }
+*/
 

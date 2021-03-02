@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('../lib/font-awesome-4.7.0/css/font-awesome.min.css');
+@import url('../css/fontawesome.css');
 body {
     padding-top: 20px;
     padding-bottom: 100px;

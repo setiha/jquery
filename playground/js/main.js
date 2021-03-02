@@ -112,25 +112,6 @@ function fillTicketsTable(currentTickets) {
 fillTicketsTable();
 
 //Jegyek tablazat szurese
-$(".tickets-search-row input").on("keyup", filterTickets);
-function filterTickets() {
-    let currentValue = $(this).val().toLowerCase();
-    let filteredTickets = [];
-    if (currentValue === "") {
-        filteredTickets = tickets;
-    } else {
-        filteredTickets = tickets.filter(function (item) {
-            var done = false;
-            for (let k in item) {
-                if (item[k].toString().toLowerCase().indexOf(currentValue) > -1) {
-                    done = true;
-                }
-            }
-            return done;
-        });
-    }
-    fillTicketsTable(filteredTickets);
-}
 
 //jegyek tablazat rendezese
 ticketTable.find("thead th[data-key]").on("click", orderTicketTable);
