@@ -67,34 +67,6 @@ function filterTickets() {
 }
 
 //jegyek tablazat rendezese
-ticketTable.find("thead th[data-key]").on("click", orderTicketTable);
-function orderTicketTable() {
 
-    let th = $(this);
-    $.each(ticketTable.find("thead th[data-key]"), function (index, elem) {
-        let currentTh = $(elem);
-        if (th.data("key") != currentTh.data("key")) {
-            currentTh.removeClass("up").removeClass("down");
-        }
-    })
-    let key = th.data("key");
-    let sortedTickets = tickets.map(function (item) {
-        return item;
-    });
-    if (th.hasClass("down")) {
-        th.removeClass("down").addClass("up");
-    } else {
-        th.removeClass("up").addClass("down");
-    }
-    sortedTickets.sort(function (a, b) {
-        if (th.hasClass("down")) {
-            return a[key].toString().localeCompare(b[key].toString());
-        } else {
-            return b[key].toString().localeCompare(a[key].toString());
-        }
-
-    });
-    fillTicketsTable(sortedTickets);
-}
 */
 
