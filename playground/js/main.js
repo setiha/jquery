@@ -179,13 +179,16 @@ $(document).ready(function () {
             let newTicketFormNativeElem = newTicketFormElem[0];
             let before = $("#legyenJo");
             if (newTicketFormNativeElem.checkValidity() === true) {
+                console.log("New ticketform elem",newTicketFormElem);
                 let serializedFormArray = newTicketFormElem.serializeArray();
+                console.log("serialized", serializedFormArray)
                 let data = {};
                 $(serializedFormArray).each(
                     function (index, elem) {
                         data[elem['name']] = elem['value'];
                     }
                 );
+                console.log("data", data);
                 let inputs = $('input', newTicketFormElem);
                 disableInputs(inputs);
                 $.ajax({

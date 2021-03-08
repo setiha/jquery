@@ -117,7 +117,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" name="newEventForm" id="newEventForm">
+                <form callBack ="startEventsPage" method="post" action="http://localhost:3000/events" name="newEventForm" id="newEventForm">
                     <div class="form-group">
                         <label for="title">Cim</label>
                         <input name="title" type="text" id="title" class="form-control">
@@ -138,7 +138,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Megsem</button>
-                <button type="submit" class="btn btn-primary" form="newEventForm">Mentes</button>
+                <button type="submit" class="btn btn-primary" form="newEventForm" onclick="hideNewEventModal()">Mentes</button>
             </div>
         </div>
     </div>

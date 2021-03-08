@@ -131,6 +131,41 @@
         </tr>
     </table>
 </div>
+
+<div class="modal fade" id="newTicketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Uj jegy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form callBack ="startEventsPage" method="post" action="http://localhost:3000/events" name="newEventForm" id="newEventForm">
+                    <div class="form-group">
+                        <label for="title">Cim</label>
+                        <input name="title" type="text" id="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Datum</label>
+                        <input name="time" type="date" id="time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Kep</label>
+                        <input name="image" type="text" id="image" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Leiras</label>
+                        <input name="description" type="text" id="description" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Megsem</button>
+                <button type="submit" class="btn btn-primary" form="newEventForm" onclick="hideNewEventModal()">Mentes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Bootstrap core JavaScript
   ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

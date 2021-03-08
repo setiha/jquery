@@ -1,18 +1,32 @@
 {
-  "events":[
+  "events": [
     {
-      "id":1,
+      "id": 1,
       "title": "Sziget Fesztival",
       "description": "Latogass el mihozzank jobarat",
       "time": "2018-08-03",
-      "image":"img/sziget.png"
+      "image": "img/sziget.png"
     },
     {
-      "id":2,
+      "id": 2,
       "title": "Diotoro",
       "description": "Ez mar a masodik",
       "time": "2018-08-03",
-      "image":"img/diotoro.jpg"
+      "image": "img/diotoro.jpg"
+    },
+    {
+      "title": "Malacka",
+      "time": "2021-03-20",
+      "image": "img/sziget.png",
+      "description": "Jo",
+      "id": 3
+    },
+    {
+      "title": "EFOTT",
+      "time": "2021-03-10",
+      "image": "img/sziget.png",
+      "description": "Edik vagytok mind",
+      "id": 4
     }
   ],
   "tickets": [
@@ -80,6 +94,34 @@
       "time": "2021-03-03T19:26",
       "pcs": "23",
       "id": 7
+    },
+    {
+      "event": "kl",
+      "seller": "Tihamer",
+      "time": "2021-03-11T15:13",
+      "pcs": "74",
+      "id": 8
+    },
+    {
+      "event": "Macsekek",
+      "seller": "Tihamer",
+      "time": "2021-03-07T15:18",
+      "pcs": "74474",
+      "id": 9
+    },
+    {
+      "event": "Macsekek",
+      "seller": "Tihamer",
+      "time": "2021-03-07T15:22",
+      "pcs": "333",
+      "id": 10
+    },
+    {
+      "event": "nnn",
+      "seller": "Tihamer",
+      "time": "2021-03-07T15:21",
+      "pcs": "777",
+      "id": 11
     }
   ]
 }

@@ -1,6 +1,6 @@
 $("nav a.nav-link").click(function (ev) {
     ev.preventDefault();
-    var link = $(this);
+    let link = $(this);
     $(document.body).animate({
         opacity: 0
     }, 1000, function () {
@@ -23,7 +23,7 @@ $(".events-search-row input").on("keyup", function (ev) {
 
 
 $(".cherry-custom-file").on("change", function (ev) {
-    var name = ev.target.value.split("\\").pop();
+    let name = ev.target.value.split("\\").pop();
     $(this).find(".file-name").html(
         name);
 });
@@ -32,41 +32,32 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-/*
-function showInvalidMessage() {
-    let alertBox = $(".alert.alert-primary");
-    alertBox
-        .removeClass("alert-primary")
-        .addClass("alert-danger")
-        .find(".alert-message")
-        .text("Sikertelen belepes!");
-}
+//JQuery plugin for send form data.
 
-
-
-
-//Jegyek tablazat szurese
-$(".tickets-search-row input").on("keyup", filterTickets);
-function filterTickets() {
-    let currentValue = $(this).val().toLowerCase();
-    let filteredTickets = [];
-    if (currentValue === "") {
-        filteredTickets = tickets;
-    } else {
-        filteredTickets = tickets.filter(function (item) {
-            var done = false;
-            for (let k in item) {
-                if (item[k].toString().toLowerCase().indexOf(currentValue) > -1) {
-                    done = true;
-                }
-            }
-            return done;
+$.fn.sendForm = function () {
+    let form = $(this);
+    let action = form.attr("action");
+    let method = form.attr("method") || "post";
+    let callBack = form.attr("callBack");
+    $(this).on("submit", function (ev) {
+        ev.preventDefault();
+        let formData = {};
+        $(this).find("input").each(function (index, input) {
+            formData[input.name] = input.value;
         });
-    }
-    fillTicketsTable(filteredTickets);
-}
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: formData,
+            dataType: "JSON"
+        }).done(function (resp) {
+            console.log(resp);
+            if(window[callBack]){
+                window[callBack]();
+            }
+        })
+    });
+    return this;
+};
 
-//jegyek tablazat rendezese
-
-*/
-
+$("#newEventForm").sendForm();
