@@ -1,22 +1,22 @@
 $(document).ready(function () {
-    var RESTURL = "http://localhost:3000";
-    var searchString = '';
-    var sortKey = '';
-    var sortDirection = '';
-    var ticketListTable = $("#ticket-list");
+    let RESTURL = "http://localhost:3000";
+    let searchString = '';
+    let sortKey = '';
+    let sortDirection = '';
+    let ticketListTable = $("#ticket-list");
     // lapozas globalis valtozoi
-    var pageLimit = 3; // hany egyed jelenjen meg egy lapon
-    var currentPage = 1; // jelenleg hol all a lapozo
-    var maxPage = 0; // hany oldalt tudunk megjeleniteni
-    var totalCount = 0; // osszes egyed szam amit a server tud szolgaltatni
+    let pageLimit = 3; // hany egyed jelenjen meg egy lapon
+    let currentPage = 1; // jelenleg hol all a lapozo
+    let maxPage = 0; // hany oldalt tudunk megjeleniteni
+    let totalCount = 0; // osszes egyed szam amit a server tud szolgaltatni
 
     // tabla kitoltese javascript object-bol
     function fillTicketsTable(currentTickets) {
-        var tbody = $("#ticket-list tbody");
+        let tbody = $("#ticket-list tbody");
         tbody.html('');
 
         $.each(currentTickets, function (index, ticket) {
-            var row = $(".templates .ticket-row").clone();
+            let row = $(".templates .ticket-row").clone();
             row.find("td").eq(0).html(ticket.id);
             row.find("td").eq(1).html(ticket.event);
             row.find("td").eq(2).html(ticket.time);
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
         $.getJSON(url).done(
             function (ticketList, textStatus, request) {
-                var oldMaxPage = maxPage;
+                let oldMaxPage = maxPage;
                 // valasz fejlecbol kiolvassuk az osszes lehetseges talalat szamat
                 totalCount = request.getResponseHeader('X-Total-Count');
                 maxPage = totalCount / pageLimit;
@@ -65,7 +65,7 @@ $(document).ready(function () {
                     maxPage = parseInt(maxPage) + 1;
                 }
                 // ha valtozott az oldalak szama akkor ujra kirajzoljuk a lapozot
-                if (oldMaxPage != maxPage) {
+                if (oldMaxPage !== maxPage) {
                     renderTicketTabletPaginator();
                 }
 
@@ -78,12 +78,12 @@ $(document).ready(function () {
     }
 
     function refreshPaginate() {
-        var paginatorElem = $('#ticket-list-paginator');
+        let paginatorElem = $('#ticket-list-paginator');
 
         // bal oldali nyilacska elem referencia
-        var firstElem = paginatorElem.find('ul > li:first-child');
+        let firstElem = paginatorElem.find('ul > li:first-child');
         // jobb oldali nyilacska elem referencia
-        var lastElem = paginatorElem.find('ul > li:last-child');
+        let lastElem = paginatorElem.find('ul > li:last-child');
 
         if (currentPage == 1) {
             // bal oldali nyilacska tiltasa
@@ -102,7 +102,7 @@ $(document).ready(function () {
         }
 
         // Megnezzuk hogy van-e most olyan elem a paginatorban ami active
-        var currentActiveElem = paginatorElem.find('ul > li.active');
+        let currentActiveElem = paginatorElem.find('ul > li.active');
         if (currentActiveElem.length > 0) {
             // ha van olyan elem akkor levesszuk rola az active class-t
             currentActiveElem.removeClass('active');
@@ -113,11 +113,11 @@ $(document).ready(function () {
     }
 
     function renderTicketTabletPaginator() {
-        var paginatorULElem = $('#ticket-list-paginator > ul');
+        let paginatorULElem = $("#ticket-list-paginator > ul");
         // mivel ujra generaljuk a lapozot, ezert elotte uritjuk
         paginatorULElem.html('');
 
-        var html = [];
+        let html = [];
         // balra nyilacska html (nem valtoztatjuk)
         html.push('<li class="page-item"><a class="page-link" href="#" aria-label="Previous" data-paginate-size="prev"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>');
 
@@ -146,21 +146,21 @@ $(document).ready(function () {
         $('#ticket-list-paginator > ul > li > a').click(
             function (event) {
 
-                var oldCurrentPage = currentPage;
+                let oldCurrentPage = currentPage;
                 // click esemeny megallitasa, igy nem fut le az A elemben megadott href attributum url keres
                 event.preventDefault();
                 // data-paginate-size kiolvasasa
-                var paginateSize = $(this).data('paginate-size');
-                if (paginateSize == 'prev') {
+                let paginateSize = $(this).data('paginate-size');
+                if (paginateSize === 'prev') {
                     // ha prev gombra nyomtak akkor csokkentjuk a "globalis" currentPage erteket
                     currentPage--;
-                } else if (paginateSize == 'next') {
+                } else if (paginateSize === 'next') {
                     // ha next gombra nyomtak akkor noveljuk a "globalis" currentPage erteket
                     currentPage++;
                 } else {
                     currentPage = parseInt(paginateSize);
                 }
-                if (oldCurrentPage != currentPage) {
+                if (oldCurrentPage !== currentPage) {
                     // lista frissitese
                     refreshTicketList();
                 }
@@ -180,10 +180,10 @@ $(document).ready(function () {
     // rendezes lekezelese (fejlecben kattintas hatasa)
     ticketListTable.find("thead th[data-key]").on("click",
         function () {
-            var th = $(this);
+            let th = $(this);
             $.each(ticketListTable.find('thead th[data-key]'), function (index, elem) {
-                var currentTh = $(elem);
-                if (th.data("key") != currentTh.data("key")) {
+                let currentTh = $(elem);
+                if (th.data("key") !== currentTh.data("key")) {
                     currentTh.removeClass("asc").removeClass("desc");
                 }
             });
@@ -202,4 +202,58 @@ $(document).ready(function () {
 
     // Innen indul az alkalmazas
     refreshTicketList();
+
+
+    ticketListTable.on("ticketDataChanged", function () {
+        refreshTicketList();
+    })
 });
+
+//kivalasztott esemeny
+
+window.currentEvent = null;
+
+
+//jegylista frissitese
+function refreshTicketList() {
+    $("#ticket-list").trigger("ticketDataChanged");
+}
+function openNewTicketModal() {
+    $("#newTicketModal").modal("show");
+}
+function hideNewTicketModal() {
+    $("#newTicketModal").modal("hide");
+}
+function setEventDetails(event) {
+    console.log(event);
+    $("#event").val(event.title);
+    $("#time").val(event.time);
+    console.log(event.time);
+}
+
+$.getJSON("http://localhost:3000/events").done(
+    function (events) {
+        let select = $("#eventId")
+            .on("change", function (ev) {
+                let event = $(this)
+                    .find("option:selected")
+                    .data("event");
+                setEventDetails(event);
+            });
+        let eventId = window.location.href.match(/\?.*event\=([0-9]*)/)[1];
+        $.each(events, function (index, event) {
+            let option = $("<option />");
+            option.data("event", event);
+            option.val(event.id);
+            option.text(event.title);
+
+            if (event.id == eventId) {
+                option.attr("selected", true);
+                setEventDetails(event);
+            }
+            select.append(option);
+        })
+    }
+);
+
+$("#newTicketForm").sendForm();

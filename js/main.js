@@ -7,7 +7,7 @@ $("nav a.nav-link").click(function (ev) {
         document.location = link.attr("href");
     })
 })
-$(".events-search-row input").on("keyup", function (ev) {
+$(".events-search-row input, select").on("keyup", function (ev) {
     $.each($(".events-card-deck .card .card-title"), function (i, e) {
         let elem = $(e);
         let search = ev.target.value.toLowerCase();
@@ -42,7 +42,7 @@ $.fn.sendForm = function () {
     $(this).on("submit", function (ev) {
         ev.preventDefault();
         let formData = {};
-        $(this).find("input").each(function (index, input) {
+        $(this).find("input, select" ).each(function (index, input) {
             formData[input.name] = input.value;
         });
         $.ajax({

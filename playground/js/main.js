@@ -208,7 +208,7 @@ $(document).ready(function () {
                     showAlert(before, 'warning', 'hiba  a server eleresenel');
                 })
             }
-            if (newTicketFormElem.hasClass('was-validated') == false) {
+            if (newTicketFormElem.hasClass('was-validated') === false) {
                 newTicketFormElem.addClass('was-validated');
             }
 
@@ -216,3 +216,4 @@ $(document).ready(function () {
     )
 
 });
+
